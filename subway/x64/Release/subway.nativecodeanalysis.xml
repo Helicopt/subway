@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DEFECTS>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>e:\workspace\vs\subway\subway\</FILEPATH>
+      <FILENAME>subway.cpp</FILENAME>
+      <LINE>254</LINE>
+      <COLUMN>14</COLUMN>
+    </SFA>
+    <DEFECTCODE>6246</DEFECTCODE>
+    <DESCRIPTION>Local declaration of 'tmp' hides declaration of the same name in outer scope. For additional information, see previous declaration at line '241' of 'e:\workspace\vs\subway\subway\subway.cpp'.</DESCRIPTION>
+    <FUNCTION>subway_machine::bfs</FUNCTION>
+    <DECORATED>?bfs@subway_machine@@AEAAHHH_NPEAH@Z</DECORATED>
+    <FUNCLINE>217</FUNCLINE>
+    <PATH>
+      <SFA>
+        <FILEPATH>e:\workspace\vs\subway\subway\</FILEPATH>
+        <FILENAME>subway.cpp</FILENAME>
+        <LINE>241</LINE>
+        <COLUMN>1</COLUMN>
+      </SFA>
+    </PATH>
+  </DEFECT>
+</DEFECTS>
