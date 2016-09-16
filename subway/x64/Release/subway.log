@@ -1,6 +1,8 @@
 ﻿  subway.cpp
   Generating code
-  All 1100 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  1 of 1100 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    7 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   subway.vcxproj -> E:\workspace\VS\subway\x64\Release\subway.exe
   subway.vcxproj -> E:\workspace\VS\subway\x64\Release\subway.pdb (Full PDB)

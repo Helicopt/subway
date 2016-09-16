@@ -344,7 +344,7 @@ private:
 				int nc = 0;
 				for (int i = 1; i < ks; ++i) {
 					int y = kk[ks - 1 - i];
-					if (et[y] < stas[y].de) {
+					if (et[y] <= stas[y].de) {
 						anst[an++] = y;
 						if (et[y] == 0) ++nc;
 						++et[y];
