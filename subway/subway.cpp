@@ -58,7 +58,7 @@ private:
 		return 0;
 	}
 
-	int add_station(const char *s, int lid) {
+	int add_station(const char *s, int lid = -1) {
 		string ss(s);
 		int k;
 		if (Sta.find(ss) != Sta.end()) {
@@ -123,7 +123,7 @@ private:
 						s[strlen(s) - 1] = '\0';
 						ow = true;
 					}
-					int cyc = add_station(s,-1);
+					int cyc = add_station(s);
 					addE(line_g[n][k - 1], cyc);
 					if (ow == false)
 						addE(cyc, line_g[n][k - 1]);
@@ -182,7 +182,10 @@ private:
 			q.pop();
 			for (int p = stas[x.scn].g; p; p = e[p].nxt) {
 				PA y(x.scn, e[p].a);
-				int stp = (inters(inters(stas[x.scn].v, stas[x.fst].v), inters(stas[y.scn].v, stas[y.fst].v)).size() == 0) + step;
+				int stp = (inters(inters(stas[x.scn].v, stas[x.fst].v), inters(stas[y.scn].v, stas[y.fst].v)).size() != 0) + step;
+				if (f[x] != PA(0, s)) {
+					if (abs(f[x].fst) == add_station("大望路") && y.scn == add_station("高碑店") || abs(f[x].fst) == add_station("高碑店") && y.scn == add_station("大望路")) ++stp;
+				}
 				bool flag = u.find(y) == u.end() || stp < u[y] || stp == u[y] && (v.find(y) == v.end() || d + 1 < v[y]);
 				if (flag) {
 					q.push(y);
@@ -202,8 +205,13 @@ private:
 		while (y != PA(0, s)) {
 			string tmp(stas[y.scn].s);
 			vector<int> tk= inters(stas[x.scn].v, stas[x.fst].v);
-			if (inters(inters(stas[y.scn].v, stas[y.fst].v), tk).size() == 0) {
+			if (inters(inters(stas[y.scn].v, stas[y.fst].v), tk).size() != 1) {
 				tmp += string("换乘")+string(lines[tk[0]]);
+			}
+			if (f[y] != PA(0, s)) {
+				if (abs(f[y].fst) == add_station("大望路") && x.scn == add_station("高碑店") || abs(f[y].fst) == add_station("高碑店") && x.scn == add_station("大望路")) {
+					tmp += string("换乘") + string(lines[tk[0]]);
+				}
 			}
 			ans.push_back(tmp);
 			x = y;
@@ -239,8 +247,11 @@ private:
 			for (int p = stas[x].g; p; p = e[p].nxt) {
 				int y = e[p].a;
 				vector<int> tmp = inters(stas[x].v, stas[y].v);
-				int stp = (inters(inters(stas[x].v, stas[abs(f[x])].v), tmp).size() == 0) + step;
+				int stp = (inters(inters(stas[x].v, stas[abs(f[x])].v), tmp).size() != 1) + step;
 				if (f[x] == 0) stp = 0;
+				if (f[x] != 0 && f[abs(f[x])] != 0) {
+					if (abs(f[abs(f[x])]) == add_station("大望路") && y == add_station("高碑店") || abs(f[abs(f[x])]) == add_station("高碑店") && y == add_station("大望路")) ++stp;
+				}
 				bool flag = v[x] + 1 < v[y];
 				if (flag) {
 					q.push(y);
