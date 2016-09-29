@@ -1,4 +1,4 @@
-#include <cstdio>
+ï»¿#include <cstdio>
 #include <cstdlib>
 #include <cmath>
 #include <cstring>
@@ -24,7 +24,7 @@ typedef struct node
 {
 	int g, de;
 	char s[64];
-	vector<int> v,con;
+	vector<int> v, con;
 }ND;
 
 const string subway_file("beijing-subway.txt");
@@ -40,8 +40,8 @@ private:
 	map<PA, PAP> paths;
 	ND stas[maxn];
 	E e[maxn*maxn >> 1];
-	int et[maxn],tg[maxn],maxtime,lim=4000000;
-	int ansq[maxn], ans,anst[maxn],an;
+	int et[maxn], tg[maxn], maxtime, lim = 4000000;
+	int ansq[maxn], ans, anst[maxn], an;
 
 	void addE(int x, int y) {
 		++tot;
@@ -111,9 +111,9 @@ private:
 					int id = add_station(s, n);
 					line_g[n].push_back(id);
 					if (i > 1) {
-						addE(line_g[n][i - 2], line_g[n][i-1]);
+						addE(line_g[n][i - 2], line_g[n][i - 1]);
 						if (ow == false)
-							addE(line_g[n][i-1], line_g[n][i - 2]);
+							addE(line_g[n][i - 1], line_g[n][i - 2]);
 					}
 				}
 				if (tp) {
@@ -155,7 +155,7 @@ private:
 	void bfs2(int s, int t) {
 		if (s == t)
 		{
-			printf_s("ÒÑµ½´ï\n");
+			printf_s("å·²åˆ°è¾¾\n");
 			return;
 		}
 		queue<PA> q;
@@ -182,9 +182,9 @@ private:
 			q.pop();
 			for (int p = stas[x.scn].g; p; p = e[p].nxt) {
 				PA y(x.scn, e[p].a);
-				int stp = (inters(inters(stas[x.scn].v, stas[x.fst].v), inters(stas[y.scn].v, stas[y.fst].v)).size() != 0) + step;
+				int stp = (inters(inters(stas[x.scn].v, stas[x.fst].v), inters(stas[y.scn].v, stas[y.fst].v)).size() != 1) + step;
 				if (f[x] != PA(0, s)) {
-					if (abs(f[x].fst) == add_station("´óÍûÂ·") && y.scn == add_station("¸ß±®µê") || abs(f[x].fst) == add_station("¸ß±®µê") && y.scn == add_station("´óÍûÂ·")) ++stp;
+					if (abs(f[x].fst) == add_station("å¤§æœ›è·¯") && y.scn == add_station("é«˜ç¢‘åº—") || abs(f[x].fst) == add_station("é«˜ç¢‘åº—") && y.scn == add_station("å¤§æœ›è·¯")) ++stp;
 				}
 				bool flag = u.find(y) == u.end() || stp < u[y] || stp == u[y] && (v.find(y) == v.end() || d + 1 < v[y]);
 				if (flag) {
@@ -204,13 +204,13 @@ private:
 		PA y(mi, t), x(t, t);
 		while (y != PA(0, s)) {
 			string tmp(stas[y.scn].s);
-			vector<int> tk= inters(stas[x.scn].v, stas[x.fst].v);
+			vector<int> tk = inters(stas[x.scn].v, stas[x.fst].v);
 			if (inters(inters(stas[y.scn].v, stas[y.fst].v), tk).size() != 1) {
-				tmp += string("»»³Ë")+string(lines[tk[0]]);
+				tmp += string("æ¢ä¹˜") + string(lines[tk[0]]);
 			}
 			if (f[y] != PA(0, s)) {
-				if (abs(f[y].fst) == add_station("´óÍûÂ·") && x.scn == add_station("¸ß±®µê") || abs(f[y].fst) == add_station("¸ß±®µê") && x.scn == add_station("´óÍûÂ·")) {
-					tmp += string("»»³Ë") + string(lines[tk[0]]);
+				if (abs(f[y].fst) == add_station("å¤§æœ›è·¯") && x.scn == add_station("é«˜ç¢‘åº—") || abs(f[y].fst) == add_station("é«˜ç¢‘åº—") && x.scn == add_station("å¤§æœ›è·¯")) {
+					tmp += string("æ¢ä¹˜") + string(lines[tk[0]]);
 				}
 			}
 			ans.push_back(tmp);
@@ -222,10 +222,10 @@ private:
 		for (unsigned int i = 1; i <= ans.size(); ++i) printf("%s\n", ans[ans.size() - i].c_str());
 	}
 
-	int bfs(int s, int t, bool pt = true, int *ret=NULL) {
+	int bfs(int s, int t, bool pt = true, int *ret = NULL) {
 		if (s == t)
 		{
-			printf_s("ÒÑµ½´ï\n");
+			printf_s("å·²åˆ°è¾¾\n");
 			return 0;
 		}
 		queue<int> q;
@@ -250,7 +250,7 @@ private:
 				int stp = (inters(inters(stas[x].v, stas[abs(f[x])].v), tmp).size() != 1) + step;
 				if (f[x] == 0) stp = 0;
 				if (f[x] != 0 && f[abs(f[x])] != 0) {
-					if (abs(f[abs(f[x])]) == add_station("´óÍûÂ·") && y == add_station("¸ß±®µê") || abs(f[abs(f[x])]) == add_station("¸ß±®µê") && y == add_station("´óÍûÂ·")) ++stp;
+					if (abs(f[abs(f[x])]) == add_station("å¤§æœ›è·¯") && y == add_station("é«˜ç¢‘åº—") || abs(f[abs(f[x])]) == add_station("é«˜ç¢‘åº—") && y == add_station("å¤§æœ›è·¯")) ++stp;
 				}
 				bool flag = v[x] + 1 < v[y];
 				if (flag) {
@@ -258,12 +258,12 @@ private:
 					v[y] = v[x] + 1;
 					u[y] = stp;
 					f[y] = x;
-					if (stp > step) f[y] = -f[y], tr[y]=tmp[0];
+					if (stp > step) f[y] = -f[y], tr[y] = tmp[0];
 					if (y == t) {
 						int nflag = 0;
 						while (y) {
 							string tmp(stas[y].s);
-							if (nflag) tmp += string("»»³Ë")+string(lines[nflag]);
+							if (nflag) tmp += string("æ¢ä¹˜") + string(lines[nflag]);
 							if (f[y] < 0) nflag = tr[y]; else nflag = 0;
 							ans.push_back(tmp);
 							if (!pt) *(ret++) = y;
@@ -283,7 +283,7 @@ private:
 
 	void printInfo(int * q, int cnt) {
 		cout << cnt << endl;
-		for (int i = 0; i < cnt; ++i) printf_s("%s\n",stas[q[i]].s);
+		for (int i = 0; i < cnt; ++i) printf_s("%s\n", stas[q[i]].s);
 	}
 
 	void dfs(int x, int l, int s) {
@@ -291,7 +291,7 @@ private:
 		if (l == m&&x == s) {
 			if (an < ans) {
 				ans = an;
-				memcpy(ansq, anst, an*sizeof(int));
+				memcpy(ansq, anst, an * sizeof(int));
 				//printInfo(ansq, ans);
 				//exit(0);
 			}
@@ -311,18 +311,18 @@ private:
 				--an;
 			}
 		}
-		if (flag==0)
-		for (int p = stas[x].g; p; p = e[p].nxt) {
-			int y = e[p].a;
-			if (et[y] == 0 && (y != s || l == m - 1)) {
-				flag = y;
-				anst[an++] = y;
-				++et[y];
-				dfs(y, l + 1, s);
-				--et[y];
-				--an;
+		if (flag == 0)
+			for (int p = stas[x].g; p; p = e[p].nxt) {
+				int y = e[p].a;
+				if (et[y] == 0 && (y != s || l == m - 1)) {
+					flag = y;
+					anst[an++] = y;
+					++et[y];
+					dfs(y, l + 1, s);
+					--et[y];
+					--an;
+				}
 			}
-		}
 		if (flag == 0) {
 			int mx[2] = { 100100000,100100000 }, mi[2] = { -1,-1 };
 			for (int y = 1; y <= m; ++y)
@@ -340,7 +340,7 @@ private:
 			int ant = an;
 			for (int o = 0; o < 2; ++o) {
 				if (o > 0 && mi[o] == -1) continue;
-				if (o==0&&mi[o] == -1)
+				if (o == 0 && mi[o] == -1)
 				{
 					mi[o] = s;
 					if (paths.find(PA(x, mi[o])) == paths.end()) {
@@ -378,86 +378,86 @@ private:
 		for (int p = stas[x].g; p; p = e[p].nxt) {
 			int y = e[p].a;
 			if (y != f) {
-				if (stas[y].de < 3&&!tg[y]) dfs2(y, x);
+				if (stas[y].de < 3 && !tg[y]) dfs2(y, x);
 			}
 		}
 	}
 
-	public:
+public:
 
-		subway_machine() {}
+	subway_machine() {}
 
-		subway_machine(string file) {
-			strcpy_s(path, file.data());
+	subway_machine(string file) {
+		strcpy_s(path, file.data());
+	}
+
+	bool initialize(string file = string("")) {
+		if (file != "") strcpy_s(path, file.data());
+		return init() == 1;
+	}
+
+	void do_main(string s) {
+		int k = getLID(s.data());
+		if (k) {
+			for (unsigned int i = 0; i < line_g[k].size(); ++i) printf_s("%s\n", stas[line_g[k][i]].s);
 		}
+		else fprintf_s(stderr, "line %s not found.\n", s.c_str());
+	}
 
-		bool initialize(string file=string("")) {
-			if (file!="") strcpy_s(path, file.data());
-			return init()==1;
+	void do_b(string t1, string t2) {
+		if (Sta.find(t1) != Sta.end() && Sta.find(t2) != Sta.end()) {
+			int k1 = Sta[t1];
+			int k2 = Sta[t2];
+			//cout << k1 << "," << k2 << endl;
+			bfs(k1, k2);
 		}
+		else fprintf_s(stderr, "station not found.\n");
+	}
 
-		void do_main(string s) {
-			int k = getLID(s.data());
-			if (k) {
-				for (unsigned int i = 0; i < line_g[k].size(); ++i) printf_s("%s\n", stas[line_g[k][i]].s);
-			}
-			else fprintf_s(stderr, "line %s not found.\n", s.c_str());
+	void do_c(string t1, string t2) {
+		if (Sta.find(t1) != Sta.end() && Sta.find(t2) != Sta.end()) {
+			int k1 = Sta[t1];
+			int k2 = Sta[t2];
+			//cout << k1 << "," << k2 << endl;
+			bfs2(k1, k2);
 		}
+		else fprintf_s(stderr, "station not found.\n");
+	}
 
-		void do_b(string t1, string t2) {
-			if (Sta.find(t1) != Sta.end() && Sta.find(t2) != Sta.end()) {
-				int k1 = Sta[t1];
-				int k2 = Sta[t2];
-				//cout << k1 << "," << k2 << endl;
-				bfs(k1, k2);
-			}
-			else fprintf_s(stderr, "station not found.\n");
-		}
-
-		void do_c(string t1, string t2) {
-			if (Sta.find(t1) != Sta.end() && Sta.find(t2) != Sta.end()) {
-				int k1 = Sta[t1];
-				int k2 = Sta[t2];
-				//cout << k1 << "," << k2 << endl;
-				bfs2(k1, k2);
-			}
-			else fprintf_s(stderr, "station not found.\n");
-		}
-
-		void do_a(string t1) {
-			if (Sta.find(t1) != Sta.end()) {
-				int k1 = Sta[t1];
-				//cout << k1 << endl;
-				memset(et, 0, sizeof(et));
-				memset(tg, 0, sizeof(tg));
-				maxtime = 0;
-				for (int i = 1; i <= m; ++i) {
-					if (stas[i].de == 1&&!tg[i]) {
-						dfs2(i,0);
-					}
-				}
-				an = 1;
-				ans = 1001;
-				anst[0] = k1;
-				paths.clear();
-				dfs(k1, 0, k1);
-				cout << ans << endl;
-				for (int i = 0; i < ans; ++i) {
-					printf("%s\n", stas[ansq[i]].s);
+	void do_a(string t1) {
+		if (Sta.find(t1) != Sta.end()) {
+			int k1 = Sta[t1];
+			//cout << k1 << endl;
+			memset(et, 0, sizeof(et));
+			memset(tg, 0, sizeof(tg));
+			maxtime = 0;
+			for (int i = 1; i <= m; ++i) {
+				if (stas[i].de == 1 && !tg[i]) {
+					dfs2(i, 0);
 				}
 			}
-			else fprintf_s(stderr, "station not found.\n");
+			an = 1;
+			ans = 1001;
+			anst[0] = k1;
+			paths.clear();
+			dfs(k1, 0, k1);
+			cout << ans << endl;
+			for (int i = 0; i < ans; ++i) {
+				printf("%s\n", stas[ansq[i]].s);
+			}
 		}
+		else fprintf_s(stderr, "station not found.\n");
+	}
 
-		void usage() {
-			printf_s(
-				"usage: \n\
+	void usage() {
+		printf_s(
+			"usage: \n\
   <empty> wait for input and show the stations on that line\n\
   -b station1 station2 \t find the way from sta.1 to sta.2 \n \t\t\t via the least stations\n\
   -c station1 station2 \t find the way from sta.1 to sta.2 \n \t\t\t which transfers the least and via the least stations\n\
   -a station \t\t go for a cycle trip start at this station\n\
 ");
-		}
+	}
 
 };
 
